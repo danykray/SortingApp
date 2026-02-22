@@ -1,0 +1,9 @@
+A123BCD;Mercedes-Benz;120000
+B456EFG;Volvo;95000
+something
+C789HIJ;Scania;abc
+D012KLM;MAN;80000
+;Iveco;50000
+E345FGH;   ;30000
+F678IJK;Hyundai;-1500
+G901LMN;Renault;67000
