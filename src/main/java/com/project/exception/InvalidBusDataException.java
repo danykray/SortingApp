@@ -1,4 +1,4 @@
-package org.example;
+package com.project.exception;
 
 public class InvalidBusDataException extends Exception{
     

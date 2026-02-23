@@ -1,4 +1,6 @@
-package org.example;
+package com.project.input;
+
+import com.project.entity.Bus;
 
 import java.util.List;
 import java.util.Scanner;

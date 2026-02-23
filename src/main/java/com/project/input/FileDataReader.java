@@ -1,7 +1,10 @@
-package org.example;
+package com.project.input;
+
+import com.project.exception.InvalidBusDataException;
+import com.project.entity.Bus;
+import com.project.entity.BusParser;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,14 +12,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFile {
+public class FileDataReader {
 
     private static final String FILEPATH_ = "/buses.txt";
 
     public static List<Bus> readAll() {
         List<Bus> result = new ArrayList<>();
 
-        InputStream is = ReadFile.class.getResourceAsStream(FILEPATH_);
+        InputStream is = FileDataReader.class.getResourceAsStream(FILEPATH_);
         if (is == null) {
             throw new IllegalStateException(
                     "Ресурс '" + FILEPATH_ + "' не найден в classpath");
