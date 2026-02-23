@@ -1,4 +1,6 @@
-package org.example;
+package com.project.entity;
+
+import com.project.exception.InvalidBusDataException;
 
 public class BusParser {
 

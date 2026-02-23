@@ -1,14 +1,15 @@
-package org.example;
+package com.project.app;
+
+import com.project.input.FileDataReader;
+import com.project.entity.Bus;
 
 import java.util.List;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main(String[] args) {
         System.out.println("Чтение данных об автобусах из ../buses.txt\n");
 
-        List<Bus> buses = ReadFile.readAll();
+        List<Bus> buses = FileDataReader.readAll();
 
         System.out.println("\nНайдено корректных записей: " + buses.size());
 
