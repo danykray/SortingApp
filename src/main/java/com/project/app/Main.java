@@ -1,20 +1,27 @@
 package com.project.app;
 
-import com.project.input.FileDataReader;
 import com.project.entity.Bus;
+import com.project.input.InputModeMenu;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
-    static void main(String[] args) {
-        System.out.println("Чтение данных об автобусах из ../buses.txt\n");
 
-        List<Bus> buses = FileDataReader.readAll();
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\nНайдено корректных записей: " + buses.size());
+        InputModeMenu menu = new InputModeMenu(scanner);
 
-        for (Bus bus : buses) {
-            System.out.println(bus);
+        while (true) {
+
+            List<Bus> buses = menu.start();
+            if (buses == null) break;
+
+            System.out.println("\nПолучены данные (" + buses.size() + "):");
+            buses.forEach(System.out::println);
         }
+        System.out.println("Выход из программы.");
+        scanner.close();
     }
 }

@@ -8,20 +8,20 @@ import java.util.Random;
 
 public class RandomDataGenerator {
 
-    private static final int mileageMax = 500000;
-    private static final String let = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final int MILEAGE_MAX = 500_000;
+    private static final String LETTERS = "АВЕКМНОРСТУХ";
 
     private final Random random = new Random();
 
-    private List<String> models = List.of(
-            "PAZ",
-            "GAZ",
-            "MAZ",
-            "LiAZ",
-            "KamAZ"
+    private final List<String> models = List.of(
+            "ПАЗ",
+            "ГАЗ",
+            "МАЗ",
+            "ЛИАЗ",
+            "КАМАЗ"
     );
-    //Подшаманить потом
-    List<Bus> generate(int size) {
+
+    public List<Bus> generate(int size) {
 
         List<Bus> buses = new ArrayList<>(size);
 
@@ -31,34 +31,45 @@ public class RandomDataGenerator {
         return buses;
     }
 
-    private Bus generateBus() { //подшаманить потом
+    private Bus generateBus() {
         return Bus.builder()
-                .number(generateNumber())
-                .model(generateModel())
-                .mileage(generateMileage())
+                .setNumber(generateNumber())
+                .setModel(generateModel())
+                .setMileage(generateMileage())
                 .build();
     }
 
     private char randomLett(){
-        return let.charAt(random.nextInt(let.length()));
+        return LETTERS.charAt(random.nextInt(LETTERS.length()));
     }
 
     private int generateMileage() {
-        return random.nextInt(mileageMax + 1);
+        return random.nextInt(MILEAGE_MAX + 1);
     }
 
     private String generateModel() {
-        return models.get(random.nextInt(models.size()));
+        String base = models.get(random.nextInt(models.size()));
+        if (random.nextBoolean()) {
+            int suffix = random.nextInt(9900) + 1;
+            return base + " " + suffix;
+        }
+        return base;
     }
 
     private String generateNumber(){
         StringBuilder sb = new StringBuilder();
+
         sb.append(randomLett());
         sb.append(random.nextInt(10));
         sb.append(random.nextInt(10));
         sb.append(random.nextInt(10));
         sb.append(randomLett());
         sb.append(randomLett());
+
+        int regionDigits = random.nextBoolean() ? 2 : 3;
+        for (int i = 0; i < regionDigits; i++) {
+            sb.append(random.nextInt(10));
+        }
 
         return sb.toString();
     }

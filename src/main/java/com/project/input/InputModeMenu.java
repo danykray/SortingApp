@@ -2,22 +2,28 @@ package com.project.input;
 
 import com.project.entity.Bus;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class InputModeMenu {
 
     private final Scanner scanner;
-    private boolean isRunning = true;
+    //private boolean isRunning = true;
+
+    private final ConsoleInputReader consoleReader;
+    private final RandomDataGenerator randomGenerator;
 
     public InputModeMenu(Scanner scanner) {
         this.scanner = scanner;
+        this.consoleReader = new ConsoleInputReader(scanner);
+        this.randomGenerator = new RandomDataGenerator();
     }
 
-    public void start() {
-        RandomDataGenerator generator = new RandomDataGenerator();
+    public List<Bus> start() {
+        //RandomDataGenerator generator = new RandomDataGenerator();
 
-        while (isRunning) {
+        while (true) {
             printMenu();
             String input = scanner.nextLine().trim();
 
@@ -25,23 +31,20 @@ public class InputModeMenu {
                 int choice = Integer.parseInt(input);
                 switch (choice) {
                     case 1:
-                        manual();
-                        break;
+                        return manual();
                     case 2:
-                        random(generator);
-                        break;
+                        return random();
                     case 3:
-                        file();
-                        break;
+                        return file();
                     case 0:
-                        isRunning = false;
-                        break;
+                        return null;
                     default:
                         System.out.println("Неверный выбор. Введите число от 0 до 3.");
                 }
 
             } catch (NumberFormatException e) {
                 System.out.println("Нужно ввести число.");
+                continue;
             }
         }
     }
@@ -57,20 +60,32 @@ public class InputModeMenu {
         System.out.print("");
     }
 
-    private void manual() {
-        System.out.println("Пока нет");
-    }
-
-    private void random(RandomDataGenerator generator) {
+    private List<Bus> manual() {
         int size = requestArraySize();
-        List<Bus> buses = generator.generate(size);
-
-        System.out.println("Результат :");
-        buses.forEach(System.out::println);
+        return consoleReader.read(size);
     }
 
-    private void file() {
-        System.out.println("Пока нет");
+    private List<Bus> random() {
+        int size = requestArraySize();
+        List<Bus> buses = randomGenerator.generate(size);
+        return buses;
+    }
+
+    private List<Bus> file() {
+        List<Bus> all = FileDataReader.readAll();
+
+        if (all.isEmpty()) {
+            System.out.println("Файл прочитан, но валидных записей не найдено.");
+            return all;
+        }
+
+        boolean takeAll = requestTakeAllFromFile();
+        if (takeAll) {
+            return all;
+        }
+
+        int n = requestMaxFromFile(all.size());
+        return new ArrayList<>(all.subList(0, n));
     }
 
     private int requestArraySize() {
@@ -84,6 +99,32 @@ public class InputModeMenu {
             } catch (NumberFormatException e) {
                 System.out.println("Нужно ввести число");
             }
+        }
+    }
+
+    private int requestMaxFromFile(int maxAvailable) {
+        while (true) {
+            System.out.printf("Сколько записей взять из файла? (1..%d): ", maxAvailable);
+            String input = scanner.nextLine().trim();
+            try {
+                int n = Integer.parseInt(input);
+                if (n >= 1 && n <= maxAvailable) return n;
+                System.out.println("Число вне диапазона.");
+            } catch (NumberFormatException e) {
+                System.out.println("Нужно ввести число.");
+            }
+        }
+    }
+
+    public boolean requestTakeAllFromFile() {
+        while (true) {
+            System.out.print("Прочитать все записи из файла? (y/n): ");
+            String input = scanner.nextLine().trim().toLowerCase();
+
+            if (input.equals("y") || input.equals("yes") || input.equals("д") || input.equals("да")) return true;
+            if (input.equals("n") || input.equals("no") || input.equals("н") || input.equals("нет")) return false;
+
+            System.out.println("Введите y/n.");
         }
     }
 }
