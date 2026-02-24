@@ -8,7 +8,7 @@ public class BusValidator {
     private static final Pattern NUMBER_PATTERN = Pattern.compile(
             "^[" + RUS_LETTERS + "]\\d{3}[" + RUS_LETTERS + "]{2}\\d{2,3}$"
     );
-    private static final Pattern MODEL_PATTERN = Pattern.compile("^[А-Яа-я0-9\\s]+$");
+    private static final Pattern MODEL_PATTERN = Pattern.compile("^[А-Яа-яA-Za-z0-9\\s]+$");
 
     private BusValidator(){}
 
@@ -36,7 +36,7 @@ public class BusValidator {
         //String regex = "^[А-Яа-я0-9\\s]+$";
         if (!MODEL_PATTERN.matcher(m).matches()) {
             throw new IllegalArgumentException(
-                    "Модель должна содержать только русские буквы, цифры и пробелы"
+                    "Модель должна содержать только буквы, цифры и пробелы"
             );
         }
         return m;
