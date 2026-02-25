@@ -5,13 +5,13 @@ public class Bus {
     private final String model;
     private final int mileage;
 
-    private Bus(Builder builder) {
+    public Bus(Builder builder) {
         this.plateNumber = validatePlateNumber(builder.plateNumber);
         this.model = validateModel(builder.model);
         this.mileage = validateMileage(builder.mileage);
     }
 
-    private String validatePlateNumber(String plateNumber) {
+    public String validatePlateNumber(String plateNumber) {
         if (plateNumber == null || plateNumber.trim().isEmpty()) {
             throw new IllegalArgumentException("Государственный номер не может быть пустым");
         }
@@ -26,7 +26,7 @@ public class Bus {
         return plateNumber;
     }
 
-    private String validateModel(String model) {
+    public String validateModel(String model) {
         if (model == null || model.trim().isEmpty()) {
             throw new IllegalArgumentException("Модель не может быть пустой");
         }
@@ -39,7 +39,7 @@ public class Bus {
         return model.trim();
     }
 
-    private int validateMileage(int mileage) {
+    public int validateMileage(int mileage) {
         if (mileage <= 0) {
             throw new IllegalArgumentException("Пробег должен быть положительным числом (больше 0)");
         }
