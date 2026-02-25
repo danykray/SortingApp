@@ -72,6 +72,9 @@ public class InputModeMenu {
     }
 
     private List<Bus> file() {
+
+        System.out.println("Чтение данных из файла:");
+
         List<Bus> all = FileDataReader.readAll();
 
         if (all.isEmpty()) {
@@ -104,7 +107,7 @@ public class InputModeMenu {
 
     private int requestMaxFromFile(int maxAvailable) {
         while (true) {
-            System.out.printf("Сколько записей взять из файла? (1..%d): ", maxAvailable);
+            System.out.printf("Сколько верных записей взять из файла? (1..%d): ", maxAvailable);
             String input = scanner.nextLine().trim();
             try {
                 int n = Integer.parseInt(input);
@@ -118,7 +121,7 @@ public class InputModeMenu {
 
     public boolean requestTakeAllFromFile() {
         while (true) {
-            System.out.print("Прочитать все записи из файла? (y/n): ");
+            System.out.print("Прочитать все верные записи из файла? (y/n): ");
             String input = scanner.nextLine().trim().toLowerCase();
 
             if (input.equals("y") || input.equals("yes") || input.equals("д") || input.equals("да")) return true;

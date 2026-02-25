@@ -1,9 +1,10 @@
-A123BCD;Mercedes-Benz;120000
-B456EFG;Volvo;95000
+С275ТМ83;Mercedes-Benz;120000
+Е268НО15;Volvo;95000
 something
-C789HIJ;Scania;abc
-D012KLM;MAN;80000
+С635МК477;Scania;abc
+О012ОК123;КамАЗ;80000
 ;Iveco;50000
-E345FGH;   ;30000
-F678IJK;Hyundai;-1500
-G901LMN;Renault;67000
+М732ВА59;   ;30000
+
+А123КВ198;Hyundai;-1500
+Х345АВ12;Renault;67000

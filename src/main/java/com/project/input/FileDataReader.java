@@ -34,20 +34,20 @@ public class FileDataReader {
             while ((line = br.readLine()) != null) {
                 lineNumber++;
 
-            if (line.isBlank()) {
+                if (line.isBlank()) {
                     continue;
                 }
 
-            try {
-                Bus bus = BusParser.parse(line, lineNumber);
-                result.add(bus);
-            } catch (InvalidBusDataException e) {
+                try {
+                    Bus bus = BusParser.parse(line, lineNumber);
+                    result.add(bus);
+                } catch (InvalidBusDataException e) {
                     System.err.println(e.getMessage());
+                }
             }
-            }
-            } catch (IOException e) {
-                System.err.println("Ошибка ввода‑вывода: " + e.getMessage());
-            }
+        } catch (IOException e) {
+            System.err.println("Ошибка ввода‑вывода: " + e.getMessage());
+        }
 
         return result;
     }
