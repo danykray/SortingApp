@@ -15,11 +15,11 @@ public class BusTest {
         System.out.println("Тест №1: Базовая проверка корректного создания автобуса");
 
         try {
-            Bus bus = (new Bus.Builder()).setNumber("А196АА48").setModel("ПАЗ 01").setMileage(1000000).build();
+            Bus bus = (new Bus.Builder()).setNumber("А196АА48").setModel("ПАЗ 123").setMileage(1000000).build();
 
             assert bus.getNumber().equals("А196АА48") : "Номер не соответствует";
 
-            assert bus.getModel().equals("ПАЗ 01") : "Модель не соответствует";
+            assert bus.getModel().equals("ПАЗ 123") : "Модель не соответствует";
 
             assert bus.getMileage() == 1000000 : "Пробег не соответствует";
 
