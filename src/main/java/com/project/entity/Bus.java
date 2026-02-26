@@ -31,7 +31,7 @@ public class Bus {
         private String model;
         private int mileage = 0;
 
-        Builder() {}
+        private Builder() {}
 
         public Builder setNumber(String number) {
             this.number = number;
